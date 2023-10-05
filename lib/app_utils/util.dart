@@ -23,7 +23,7 @@ final kEvents = LinkedHashMap<DateTime, List<Event>>(
   equals: isSameDay,
   hashCode: getHashCode,
   // 객체 생성과 동시에 addAll 메소드를 실행
-)..addAll(_kEventSource);
+);
 
 
 ///마킹 해주는 이벤트 인덱스 길이가 왜 필요한교...?

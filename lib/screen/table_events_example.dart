@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:memo/model/event_model.dart';
 import 'package:memo/model/memo_model.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../app_utils/util.dart';
+
 import 'package:provider/provider.dart';
 import 'package:memo/screen/addmemo_screen.dart';
+
+import '../vo/event.dart';
 
 
 
@@ -14,18 +17,19 @@ class TableEventsExample extends StatefulWidget {
 }
 
 class _TableEventsExampleState extends State<TableEventsExample> {
+
   late final ValueNotifier<List<Event>> _selectedEvents;
   CalendarFormat _calendarFormat = CalendarFormat.month;
-  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
-      .toggledOff; // Can be toggled on/off by longpressing a date
+  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode.toggledOff; // Can be toggled on/off by longpressing a date
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  var kEvents;
 
-
+  
   @override
   void initState() {
     super.initState();
-
+    kEvents=Provider.of<EventModel>(context,listen: false).kEvents;
     _selectedDay = _focusedDay;
     // ChangeNotifer 를 상속 받는 클래스
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
@@ -41,11 +45,20 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   //날짜 클릭시
   List<Event> _getEventsForDay(DateTime day) {
 
-    print('완료');
+    // print('완료 ${day}');
+    // print(kEvents[day]);
     return kEvents[day] ?? [];
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    print('====selectedDay==');
+    print(selectedDay);
+
+    Event event = Event('테스트');
+    //Provider.of<EventModel>(context,listen: false).addEvent(map: {selectedDay:[Event('테스트')]});
+    Provider.of<EventModel>(context,listen: false).addOneEvent(map: {selectedDay:Event('테스트')});
+
+
     if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
         _selectedDay = selectedDay;
@@ -80,10 +93,9 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             firstDay: DateTime(2000,1,1),
             focusedDay: _focusedDay,
             selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-
             calendarFormat: _calendarFormat,
             rangeSelectionMode: _rangeSelectionMode,
-            eventLoader: _getEventsForDay,
+            eventLoader: _getEventsForDay, //이벤트 ui 생성
             startingDayOfWeek: StartingDayOfWeek.monday,
             headerStyle: HeaderStyle(
               /// 디폴트로 설정 되 있는 2주 보기 버튼을 없애줌
@@ -161,12 +173,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                       /// 날짜 클릭시, 이벤트
                      child: ListTile(
                         onTap: () => print('상세페이지로 이동'),
-                        title: Consumer<MemoModel>(builder: (context, a, child){
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: a.memos.map((e) => Text(e,style: TextStyle(fontSize: 20),)).toList(),
-                          );
-                        },),
+                        title: Text('${value[index]}'),
                       ),
                     );
                   },

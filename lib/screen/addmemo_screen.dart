@@ -26,103 +26,105 @@ class _addMemoScreenState extends State<addMemoScreen> {
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 30,
-              ),
-              Text("Title",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.purple
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 30,
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                controller: titleController,
-                decoration: InputDecoration(
-                  hintText: "힌트",
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          width: 10,
-                          color: Colors.deepPurpleAccent
-                      ),
-                      borderRadius: BorderRadius.circular(20.0)
+                Text("Title",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.purple
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Text("Contents",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.purple
+                SizedBox(
+                  height: 10,
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                controller: contentsController,
-                decoration: InputDecoration(
-                    hintText: "힌트1",
-                    fillColor: Colors.white,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: BorderSide(
-                        color: Colors.blue,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 2.0,
-                      ),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 40)
-                ),
-                maxLines: 10,
-                maxLength: 500,
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                width: 700,
-                height: 50,
-                child: OutlinedButton(
-                  onPressed: () async{
-                    // _addMemo(
-                    //     context: context,
-                    //     onComplete: (){
-                    //       Navigator.pop(context);
-                    //     }
-                    // );
-
-                    var result = await _addMemoFuture(context: context);
-                    if(result==true){
-                      Navigator.pop(context);
-                    }
-                    print("완료");
-                  },
-                  child: Text("완료",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.purple
+                TextFormField(
+                  controller: titleController,
+                  decoration: InputDecoration(
+                    hintText: "힌트",
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 10,
+                            color: Colors.deepPurpleAccent
+                        ),
+                        borderRadius: BorderRadius.circular(20.0)
                     ),
                   ),
                 ),
-              ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text("Contents",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.purple
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: contentsController,
+                  decoration: InputDecoration(
+                      hintText: "힌트1",
+                      fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: BorderSide(
+                          color: Colors.blue,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 2.0,
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 40)
+                  ),
+                  maxLines: 10,
+                  maxLength: 500,
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  width: 700,
+                  height: 50,
+                  child: OutlinedButton(
+                    onPressed: () async{
+                      // _addMemo(
+                      //     context: context,
+                      //     onComplete: (){
+                      //       Navigator.pop(context);
+                      //     }
+                      // );
 
-            ],
+                      var result = await _addMemoFuture(context: context);
+                      if(result==true){
+                        Navigator.pop(context);
+                      }
+                      print("완료");
+                    },
+                    child: Text("완료",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.purple
+                      ),
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
           ),
         ),
       ),
