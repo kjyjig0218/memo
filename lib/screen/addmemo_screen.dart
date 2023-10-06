@@ -3,16 +3,23 @@ import 'package:memo/model/memo_model.dart';
 import 'package:memo/screen/list_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../model/event_model.dart';
+import '../vo/event.dart';
 
-class addMemoScreen extends StatefulWidget {
 
+class AddMemoScreen extends StatefulWidget {
+
+  DateTime dateTime;
+
+
+  AddMemoScreen({required this.dateTime});
 
   @override
-  State<addMemoScreen> createState() => _addMemoScreenState();
+  State<AddMemoScreen> createState() => _AddMemoScreenState();
 
 }
 
-class _addMemoScreenState extends State<addMemoScreen> {
+class _AddMemoScreenState extends State<AddMemoScreen> {
 
   TextEditingController titleController = TextEditingController();
   TextEditingController contentsController = TextEditingController();
@@ -107,11 +114,18 @@ class _addMemoScreenState extends State<addMemoScreen> {
                       //     }
                       // );
 
-                      var result = await _addMemoFuture(context: context);
-                      if(result==true){
-                        Navigator.pop(context);
-                      }
-                      print("완료");
+                      // var result = await _addMemoFuture(context: context);
+                      // if(result==true){
+                      //   Navigator.pop(context);
+                      // }
+
+
+
+                      Provider.of<EventModel>(context,listen: false).addOneEvent(map: {widget.dateTime:Event(titleController.text)});
+                      Navigator.pop(context);
+
+
+
                     },
                     child: Text("완료",
                       style: TextStyle(

@@ -54,9 +54,9 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     print('====selectedDay==');
     print(selectedDay);
 
-    Event event = Event('테스트');
+    //Event event = Event('테스트');
     //Provider.of<EventModel>(context,listen: false).addEvent(map: {selectedDay:[Event('테스트')]});
-    Provider.of<EventModel>(context,listen: false).addOneEvent(map: {selectedDay:Event('테스트')});
+    //Provider.of<EventModel>(context,listen: false).addOneEvent(map: {selectedDay:Event('테스트')});
 
 
     if (!isSameDay(_selectedDay, selectedDay)) {
@@ -79,8 +79,9 @@ class _TableEventsExampleState extends State<TableEventsExample> {
          icon:Icon(Icons.add,
            color: Colors.black87,) ,
 
-         onPressed: (){
-           Navigator.push(context, MaterialPageRoute(builder: (context) => addMemoScreen()));
+         onPressed: () async{
+           await Navigator.push(context, MaterialPageRoute(builder: (context) => AddMemoScreen(dateTime: _selectedDay!,)));
+           setState(() {});
          },
        ),
     ]

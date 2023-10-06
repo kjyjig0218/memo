@@ -28,14 +28,14 @@ class EventModel extends ChangeNotifier{
       kEvents[key]?.add(event!);
     }
 
-
-
     print('keve');
     print( kEvents[key]);
     print(key);
     print(event);
     notifyListeners();
   }
+
+
   void addEvent({required Map<DateTime, List<Event>> map}){
     kEvents[map.keys.first]?.add(Event('sdg'));
     kEvents.addAll(map);

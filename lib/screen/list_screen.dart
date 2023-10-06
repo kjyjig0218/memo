@@ -36,7 +36,7 @@ class _ListScreenState extends State<ListScreen> {
         onPressed: (){
 
           Navigator.push(
-            context, MaterialPageRoute(builder: (context) => addMemoScreen()),
+            context, MaterialPageRoute(builder: (context) => AddMemoScreen(dateTime: DateTime.now(),)),
           );
         },
         tooltip: '메모추가',
