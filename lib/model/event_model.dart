@@ -20,10 +20,11 @@ class EventModel extends ChangeNotifier{
     var key = map.keys.first;
     var event = map[map.keys.first];
 
-
+     /// 새로운 리스트 추가
     if(kEvents[key]==null){
       kEvents[key]=[];
       kEvents[key]?.add(event!);
+      /// 기존에 있던것에서 추가
     }else{
       kEvents[key]?.add(event!);
     }

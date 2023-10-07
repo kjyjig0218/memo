@@ -13,10 +13,10 @@ import '../vo/event.dart';
 
 class TableEventsExample extends StatefulWidget {
   @override
-  _TableEventsExampleState createState() => _TableEventsExampleState();
+  TableEventsExampleState createState() => TableEventsExampleState();
 }
 
-class _TableEventsExampleState extends State<TableEventsExample> {
+class TableEventsExampleState extends State<TableEventsExample> {
 
   late final ValueNotifier<List<Event>> _selectedEvents;
   CalendarFormat _calendarFormat = CalendarFormat.month;
@@ -51,7 +51,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-    print('====selectedDay==');
+    print('==selectedDay==');
     print(selectedDay);
 
     //Event event = Event('테스트');
@@ -77,7 +77,8 @@ class _TableEventsExampleState extends State<TableEventsExample> {
       appBar: AppBar(
        actions:[IconButton(
          icon:Icon(Icons.add,
-           color: Colors.black87,) ,
+           color: Colors.black87,
+        ) ,
 
          onPressed: () async{
            await Navigator.push(context, MaterialPageRoute(builder: (context) => AddMemoScreen(dateTime: _selectedDay!,)));

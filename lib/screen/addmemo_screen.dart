@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:memo/model/memo_model.dart';
 import 'package:memo/screen/list_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../model/event_model.dart';
 import '../vo/event.dart';
+import 'table_events_example.dart';
 
 
 class AddMemoScreen extends StatefulWidget {
 
   DateTime dateTime;
-
 
   AddMemoScreen({required this.dateTime});
 
@@ -28,11 +29,21 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Memo"),
+
+        iconTheme: IconThemeData(
+          color: Colors.black87,
+          size: 20,
+        ),
+        title: Text(DateFormat('yyyy-MM-dd').format(widget.dateTime),
+        style: TextStyle(
+          fontSize: 20,
+          color: Colors.black87
+        ),
+        ),
       ),
       body: Container(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,16 +55,16 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.purple
+                      color: Colors.grey[600]
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 6,
                 ),
                 TextFormField(
                   controller: titleController,
                   decoration: InputDecoration(
-                    hintText: "힌트",
+                    hintText: "제목",
                     border: OutlineInputBorder(
                         borderSide: BorderSide(
                             width: 10,
@@ -70,16 +81,16 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.purple
+                      color: Colors.black87
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 6,
                 ),
                 TextFormField(
                   controller: contentsController,
                   decoration: InputDecoration(
-                      hintText: "힌트1",
+                      hintText: "내용",
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25.0),
@@ -131,7 +142,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.purple
+                          color: Colors.black87
                       ),
                     ),
                   ),
@@ -218,5 +229,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
         ),
     );
   }
+
+
 
 }
