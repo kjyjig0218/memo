@@ -43,8 +43,13 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             OutlinedButton(
                 onPressed: () async{
+
                   GoogleSignInAccount? _account = await _googleSignIn.signIn();
                   print(_account?.email);
+
+
+                  //todo 경우 1 : 기존유저 없음 -> 회원가입 요청후 가입된 회원정보 가져오기 /
+                  //todo 경우 2 : 이미 가입된 회원이라면 -> 회원가입 없이 회원정보 가져오기
                 },
                 child: Text('Google Login')
             )
