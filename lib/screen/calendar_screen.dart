@@ -35,6 +35,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   void dispose() {
     selectedEvents.dispose();
+
     super.dispose();
   }
 
@@ -69,9 +70,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
         children: [TableCalendar(
 
           /// 이벤트에 대한 마커를 추가하기 위해 eventLoader를 설정합니다.
-          eventLoader: (day){
-            return kEvents[day] ?? [];
-          },
+          // eventLoader: (day){
+          //   return kEvents
+          // },
           // onDaySelected: (){
           //   print('day======');
           //
@@ -87,7 +88,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           firstDay: DateTime(1800),
           lastDay: DateTime(3000),
           //todo 달력 title 스타일
-          headerStyle: HeaderStyle(
+          headerStyle: const HeaderStyle(
             // 디폴트로 설정 되 있는 2주 보기 버튼을 없애줌
               formatButtonVisible: false,
               // 달력 타이틀을 센터로
@@ -95,7 +96,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               titleTextStyle: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 18,
-                  color: Colors.grey[600]
+                  color: Colors.blue
               ),
               //todo 달력 왼쪽 아이콘
               leftChevronIcon: Icon(
@@ -134,17 +135,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
               valueListenable: selectedEvents,
               builder: (context, value, _) {
                 return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  //리스트 항목 개수
                   itemCount: value.length,
+                  //리스트의 반복문 항목 형성
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 4.0,
+                      color: Colors.redAccent,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.0,
+                        // vertical: 4.0,
                       ),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
+                        decoration: BoxDecoration(
+                            // borderRadius: BorderRadius.circular(3),
+                            border: Border.all(color: Colors.grey)
+                        ),
                       /// 날짜 클릭시, 이벤트
                       child: ListTile(
                         onTap: () => print('안녕'),
@@ -156,17 +161,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
               },
             ),
           ),
-
-
-
-          // selectedDayPredicate: (DateTime date) {
-          //   if (selectedDay == null) {
-          //     return false;
-          //   }
-          //
-          //   return date.year == selectedDay!.year &&
-          //       date.month == selectedDay!.month &&
-          //       date.day == selectedDay!.day;
 
         ],
       ),

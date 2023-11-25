@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memo/model/memo_model.dart';
-import 'package:memo/screen/list_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../model/event_model.dart';
@@ -29,7 +28,14 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Icon(
+                Icons.delete_forever_outlined,
+                size: 30),
+          )
+        ],
         iconTheme: IconThemeData(
           color: Colors.black87,
           size: 20,
@@ -43,7 +49,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
       ),
       body: Container(
         child: Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +61,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.grey[600]
+                      color: Colors.black87
                   ),
                 ),
                 SizedBox(
@@ -65,12 +71,19 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                   controller: titleController,
                   decoration: InputDecoration(
                     hintText: "제목",
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 10,
-                            color: Colors.deepPurpleAccent
-                        ),
-                        borderRadius: BorderRadius.circular(20.0)
+                    ///사용자가 폼 클릭시
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.deepPurpleAccent,
+                      ),
+                    ),
+                    /// 기본 폼 상태
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 1.0,
+                      ),
                     ),
                   ),
                 ),
@@ -92,20 +105,22 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                   decoration: InputDecoration(
                       hintText: "내용",
                       fillColor: Colors.white,
+                      ///사용자가 폼 클릭시
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
+                        // borderRadius: BorderRadius.circular(5.0),
                         borderSide: BorderSide(
-                          color: Colors.blue,
+                          color: Colors.deepPurpleAccent,
                         ),
                       ),
+                      /// 기본 폼 상태
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
+                        borderRadius: BorderRadius.circular(5.0),
                         borderSide: BorderSide(
                           color: Colors.grey,
-                          width: 2.0,
+                          width: 1.0,
                         ),
                       ),
-                      contentPadding: EdgeInsets.symmetric(vertical: 40)
+                      // contentPadding: EdgeInsets.symmetric(vertical: 40)
                   ),
                   maxLines: 10,
                   maxLength: 500,
@@ -113,36 +128,41 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                 SizedBox(
                   height: 30,
                 ),
-                Container(
-                  width: 700,
-                  height: 50,
-                  child: OutlinedButton(
-                    onPressed: () async{
-                      // _addMemo(
-                      //     context: context,
-                      //     onComplete: (){
-                      //       Navigator.pop(context);
-                      //     }
-                      // );
+                Center(
+                  child: Container(
+                    width: 400,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurpleAccent,
+                        minimumSize: Size(50, 50),
 
-                      // var result = await _addMemoFuture(context: context);
-                      // if(result==true){
-                      //   Navigator.pop(context);
-                      // }
+                      ),
+                      onPressed: () async{
+                        // _addMemo(
+                        //     context: context,
+                        //     onComplete: (){
+                        //       Navigator.pop(context);
+                        //     }
+                        // );
+                        // //
+                        // // var result = await _addMemoFuture(context: context);
+                        // // if(result==true){
+                        // //   Navigator.pop(context);
+                        // // }
+
+                        Provider.of<EventModel>(context,listen: false).addOneEvent(map: {widget.dateTime:Event(titleController.text)});
+                        Navigator.pop(context);
 
 
 
-                      Provider.of<EventModel>(context,listen: false).addOneEvent(map: {widget.dateTime:Event(titleController.text)});
-                      Navigator.pop(context);
-
-
-
-                    },
-                    child: Text("완료",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.black87
+                      },
+                      child: Text("완료",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white
+                        ),
                       ),
                     ),
                   ),
@@ -156,6 +176,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
     );
   }
 
+
   Future<bool> _addMemoFuture({required BuildContext context}) async{
 
     return await showDialog(
@@ -166,7 +187,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
           TextButton(
             child: Text('취소'),
             onPressed: () {
-              Navigator.of(context1).pop();
+              Navigator.pop(context);
             },
           ),
           TextButton(
@@ -179,8 +200,10 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                   Navigator.of(context1).pop(false);
                 }else{
                   //todo 타이틀 내용이 있을때
-                  Provider.of<MemoModel>(context,listen:false).addMemo(title);
-                  Navigator.of(context1).pop(true);
+
+                  Provider.of<EventModel>(context,listen: false).addOneEvent(map: {widget.dateTime:Event(titleController.text)});
+                  Navigator.pop(context);
+
                 }
 
               });

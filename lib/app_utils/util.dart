@@ -11,7 +11,7 @@ class Event {
 
   const Event(this.title);
 
-  @override
+  @override // 재정의 덮어버리다 .
   String toString() => title;
 }
 

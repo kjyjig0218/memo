@@ -19,8 +19,6 @@ class TableEventsExample extends StatefulWidget {
 class TableEventsExampleState extends State<TableEventsExample> {
 
   late final ValueNotifier<List<Event>> _selectedEvents;
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode.toggledOff; // Can be toggled on/off by longpressing a date
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   var kEvents;
@@ -64,7 +62,6 @@ class TableEventsExampleState extends State<TableEventsExample> {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;
 
-        _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
 
       _selectedEvents.value = _getEventsForDay(selectedDay);
@@ -90,20 +87,24 @@ class TableEventsExampleState extends State<TableEventsExample> {
       body: Column(
         children: [
           TableCalendar<Event>(
+            ///언어
             locale: 'ko_KR',
+            /// 필수값
             lastDay: DateTime(2999,12,31),
             firstDay: DateTime(2000,1,1),
             focusedDay: _focusedDay,
+            /// 해당 코드로 사용자가 탭하여 선택한 날짜를 선택된 표시로 업데이트
             selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-            calendarFormat: _calendarFormat,
-            rangeSelectionMode: _rangeSelectionMode,
-            eventLoader: _getEventsForDay, //이벤트 ui 생성
-            startingDayOfWeek: StartingDayOfWeek.monday,
+            ///이벤트 ui 생성
+            eventLoader: _getEventsForDay,
+            ///시작요일
+            startingDayOfWeek: StartingDayOfWeek.sunday,
+            ///달력 헤더 스타일
             headerStyle: HeaderStyle(
-              /// 디폴트로 설정 되 있는 2주 보기 버튼을 없애줌
-                formatButtonVisible: false,
-                // 달력 타이틀을 센터로
+                /// 달력 타이틀 중앙 정렬
                 titleCentered: true,
+                /// 2weeks 기본 설정 표시 여부
+                formatButtonVisible: false,
                 titleTextStyle: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 18,
@@ -121,38 +122,17 @@ class TableEventsExampleState extends State<TableEventsExample> {
                 )
             ),
             calendarStyle: CalendarStyle(
-              //today 표시여부
-              isTodayHighlighted: true,
-              //today 모양 조정
-              defaultDecoration: BoxDecoration(
-                shape: BoxShape.circle,
-              ),
               ///선택한 날짜
-              // selectedDay 글자 조정
               selectedTextStyle: const TextStyle(
-                color: const Color(0xFFFAFAFA),
+                color: Colors.white,
                 fontSize: 16.0,
               ),
-              // selectedDay 모양 조정
               selectedDecoration: const BoxDecoration(
                 color: const Color(0xFF5C6BC0),
                 shape: BoxShape.circle,
               ),
             ),
-
-
             onDaySelected: _onDaySelected,
-            // onRangeSelected: _onRangeSelected,
-            onFormatChanged: (format) {
-              if (_calendarFormat != format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
-              }
-            },
-            onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
-            },
           ),
           const SizedBox(height: 8.0),
           ///이벤트 리스트

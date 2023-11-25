@@ -5,15 +5,13 @@ import 'package:memo/model/event_model.dart';
 import 'package:memo/screen/calendar_screen.dart';
 import 'package:memo/model/memo_model.dart';
 import 'package:memo/screen/addmemo_screen.dart';
-import 'package:memo/screen/list_screen.dart';
 import 'package:memo/screen/table_events_example.dart';
 import 'package:provider/provider.dart';
 
 
 
-void main() async {
-
-  // import 는 package:intl/date_symbol_data_local.dart
+Future <void> main() async {
+  /// 한글 언어 설정
   await initializeDateFormatting();
 
   runApp(MyMemoApp());
@@ -25,15 +23,15 @@ class MyMemoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_)=>MemoModel()),
-          ChangeNotifierProvider(create: (_)=>EventModel()),
+          // ChangeNotifierProvider(create: (context)=>MemoModel()),
+          ChangeNotifierProvider(create: (context)=>EventModel()),
         ],
       child: MaterialApp(
         title: '메모장 앱',
         theme: ThemeData(
-          scaffoldBackgroundColor: Colors.grey[300],
+          scaffoldBackgroundColor: Colors.white,
           appBarTheme: AppBarTheme(
-            backgroundColor: Colors.grey[300],
+            backgroundColor: Colors.white,
           ),
           floatingActionButtonTheme: FloatingActionButtonThemeData(
             backgroundColor: Colors.redAccent
