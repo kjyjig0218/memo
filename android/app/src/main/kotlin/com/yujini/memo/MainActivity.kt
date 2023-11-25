@@ -1,4 +1,4 @@
-package com.example.memo
+package com.yujini.memo
 
 import io.flutter.embedding.android.FlutterActivity
 
