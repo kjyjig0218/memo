@@ -5,6 +5,7 @@ import 'package:memo/model/event_model.dart';
 import 'package:memo/screen/calendar_screen.dart';
 import 'package:memo/model/memo_model.dart';
 import 'package:memo/screen/addmemo_screen.dart';
+import 'package:memo/screen/login_screen.dart';
 import 'package:memo/screen/table_events_example.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +39,7 @@ class MyMemoApp extends StatelessWidget {
           ),
         ),
 
-        home: TableEventsExample(),
+        home: LoginScreen(),
       ),
     );
   }

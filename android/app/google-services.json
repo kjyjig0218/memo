@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "362588443986",
+    "project_id": "memo-da10c",
+    "storage_bucket": "memo-da10c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362588443986:android:4aadbd51118c5a79cf968b",
+        "android_client_info": {
+          "package_name": "com.yujini.memo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkEOSuNG9qY58QUMOdjSbbzx6G8xxPUCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
